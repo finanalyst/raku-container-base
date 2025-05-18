@@ -33,6 +33,11 @@ requires I<sass> and I<graphviz>. All of these can be installed on an
 Alpine based docker container, but the base images needs to be retained
 and the user should still be C<root>.
 
+=head Image location
+The images are all at C<dockhub>.
+=numitem docker.io/finanalyst/raku-cro-base
+=numitem docker.io/finanalyst/raku-cro-rrr-base
+
 =head Useage
 
 The following are examples with the recommended addition of

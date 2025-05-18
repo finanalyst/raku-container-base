@@ -7,6 +7,7 @@
 
 <a href="#Introduction">Introduction</a>   
 <a href="#Rationale">Rationale</a>   
+<a href="#Image_location_The_images_are_all_at_dockhub.">Image location The images are all at `dockhub`.</a>   
 <a href="#Useage">Useage</a>   
 &nbsp;&nbsp;- <a href="#Base_with_Cro">Base with Cro</a>   
 <a href="#Base_with_Rakuast::RakuDoc::Render">Base with Rakuast::RakuDoc::Render</a>   
@@ -42,6 +43,16 @@
 <span class="para" id="0cc7af4"></span>Some Raku modules need `git` to be installed, and a few require `make` and `gcc`. 
 
 <span class="para" id="cdd5615"></span>Cro requires `open-ssl-dev` library to be available, while Rakuast-RakuDoc-Render requires *sass* and *graphviz*. All of these can be installed on an Alpine based docker container, but the base images needs to be retained and the user should still be `root`. 
+
+
+<div id="Image location The images are all at ``dockhub``."></div><div id="Image_location_The_images_are_all_at_dockhub."></div>
+
+## Image location The images are all at `dockhub`.
+
+
+1. docker.io/finanalyst/raku-cro-base  
+
+2. docker.io/finanalyst/raku-cro-rrr-base  
 
 <div id="Useage"></div>
 
@@ -125,7 +136,7 @@ CMD raku -I. service.raku
 
 ----
 
-Rendered from docs/README.rakudoc/README at 13:46 UTC on 2025-05-18
+Rendered from docs/README.rakudoc/README at 14:04 UTC on 2025-05-18
 
-Source last modified at 13:45 UTC on 2025-05-18
+Source last modified at 14:04 UTC on 2025-05-18
 
