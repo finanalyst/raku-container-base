@@ -1,0 +1,22 @@
+{
+    "name": "raku-container-base",
+    "description": "Container from Alpine with raku, zef, & Cro",
+    "version": "0.1.0",
+    "raku": "6.d",
+    "authors": [
+        "Richard Hainsworth"
+    ],
+    "auth": "zef:finanalyst",
+    "depends": [    ],
+    "test-depends": [  ],
+    "provides": {  },
+    "resources": [],
+    "support": {
+        "email": "richard@hainsworth.wales",
+        "bugtracker": "https://github.com/finanalyst/raku-container-base/issues",
+        "source": "https://github.com/finanalyst/raku-container-base.git"
+    },
+    "license": "Artistic-2.0",
+    "source-url": "git://github.com/finanalyst/raku-container-base.git",
+    "source-type": "git"
+}

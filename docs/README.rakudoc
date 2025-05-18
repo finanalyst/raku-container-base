@@ -1,0 +1,106 @@
+=begin rakudoc
+=TITLE Raku docker container base
+
+This repository is not a I<Raku> module per se.
+It only contains Docker files with Github CI to create images.
+
+=head Introduction
+
+Two base containers are created using Alpine that are syncronised to the current
+Rakudo release and the associated C<zef>.
+
+These images are B<NOT> intended to be run as containers! The images are intended
+as base containers with
+=numitem Base with Cro
+=item2 raku
+=item2 zef
+=item2 Cro (and its dependents)
+=for numitem :continued
+Base with CRO and Rakuast-RakuDoc-Render
+
+=head Rationale
+
+Raku base images either have too much or too little. The Rakudo-star
+image has way too many modules, while the images produced by B<JJ>
+(many thanks to him), change the user to C<raku>, and the images
+on C<rakuland> remove some important dependencies.
+
+Some Raku modules need C<git> to be installed, and a few require
+C<make> and C<gcc>.
+
+Cro requires C<open-ssl-dev> library to be available, while Rakuast-RakuDoc-Render
+requires I<sass> and I<graphviz>. All of these can be installed on an
+Alpine based docker container, but the base images needs to be retained
+and the user should still be C<root>.
+
+=head Useage
+
+The following are examples with the recommended addition of
+an appuser and the removal of base dependencies.
+
+=head2 Base with Cro
+
+=begin code :lang<docker>
+FROM docker.io/finanalyst/raku-cro-base
+
+# set up a directory for the new Raku module
+RUN mkdir /app
+
+# copy in the user's Raku module code, including META6.json if necessary
+COPY . /app
+
+# install the main Raku dependencies with zef
+
+WORKDIR /app
+RUN zef . --deps-only -/test
+
+# any other tests.
+# perhaps run a compile only to eliminate any compile time errors, eg
+RUN raku -I. -c service.raku
+
+# Now prepare for production
+
+# remove unneeded dependents
+RUN apk del gcc linux-headers make musl-dev perl
+
+# create a new user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+#add a CMD if necessary, eg.
+CMD raku -I. service.raku
+=end code
+
+=head Base with Rakuast::RakuDoc::Render
+
+=begin code :lang<docker>
+FROM docker.io/finanalyst/raku-cro-rrr-base
+
+# set up a directory for the new Raku module
+RUN mkdir /app
+
+# copy in the user's Raku module code, including META6.json if necessary
+COPY . /app
+
+# install the main Raku dependencies with zef
+
+WORKDIR /app
+RUN zef . --deps-only -/test
+
+# any other tests.
+# perhaps run a compile only to eliminate any compile time errors, eg
+RUN raku -I. -c service.raku
+
+# Now prepare for production
+
+# remove unneeded dependents
+RUN apk del gcc linux-headers make musl-dev perl
+
+# create a new user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+#add a CMD if necessary, eg.
+CMD raku -I. service.raku
+=end code
+=end rakudoc
