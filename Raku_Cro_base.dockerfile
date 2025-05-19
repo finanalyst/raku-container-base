@@ -40,4 +40,4 @@ RUN git clone -b $zef https://github.com/ugexe/zef        \
 RUN zef install 'Cro::Core'
 RUN zef install --/test 'Cro::HTTP'
 RUN zef install --/test 'Cro::WebSocket'
-
+RUN zef install --/test 'Cro::WebApp::Form'
